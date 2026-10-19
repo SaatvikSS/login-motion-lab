@@ -1,0 +1,198 @@
+/* ══════════════════════════════════════════════════════════════
+   EDITORIAL BRUTALISM — MOTION & INTERACTION
+   Deliberate. Structural. Aggressive.
+   ══════════════════════════════════════════════════════════════ */
+
+/* 01 — Input focus: hard border swap, no glow */
+.field input {
+  transition: border-color 120ms ease, background-color 120ms ease, transform 80ms ease;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  background: rgba(230, 50, 34, 0.03);
+}
+.field input:hover:not(:focus):not(:disabled) {
+  border-color: var(--ink-muted);
+}
+
+/* 02 — Button interactions: heavy, brutalist press */
+.primary {
+  transition: transform 120ms ease, background-color 200ms ease;
+}
+.primary:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* 03 — Error shake: snappier, more aggressive */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 50%, 90% { transform: translateX(-8px); }
+  30%, 70% { transform: translateX(8px); }
+}
+.is-error {
+  animation: shake 400ms cubic-bezier(0.36, 0.07, 0.19, 0.97);
+}
+
+/* 04 — Spinner: square brutalist rotation */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(90deg); }
+  50% { transform: rotate(180deg); }
+  75% { transform: rotate(270deg); }
+  100% { transform: rotate(360deg); }
+}
+.spinner {
+  animation: spin 1.2s steps(4) infinite;
+}
+
+/* 05 — Panel transitions: editorial slide */
+.panel-enter-active,
+.panel-leave-active {
+  transition: opacity 350ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 350ms cubic-bezier(0.22, 1, 0.36, 1),
+              clip-path 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.panel-enter-from {
+  opacity: 0;
+  transform: translateY(30px);
+  clip-path: inset(10% 0 0 0);
+}
+.panel-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
+  clip-path: inset(0 0 10% 0);
+}
+
+/* 06 — Scroll indicator pulse */
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; height: 40px; }
+  50% { opacity: 1; height: 55px; }
+}
+.scroll-line {
+  animation: scrollPulse 2.5s ease-in-out infinite;
+}
+
+/* 07 — Demo dot blink */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+.demo-dot {
+  animation: blink 2s steps(2) infinite;
+}
+
+/* 08 — Card number entrance */
+@keyframes fadeInNumber {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.card-number {
+  animation: fadeInNumber 600ms cubic-bezier(0.22, 1, 0.36, 1) 200ms both;
+}
+
+/* 09 — Eyebrow typewriter feel */
+.eyebrow {
+  overflow: hidden;
+  animation: revealText 400ms ease 100ms both;
+}
+@keyframes revealText {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0% 0 0); }
+}
+
+/* 10 — Heading reveal */
+.card h2 {
+  animation: slideUp 500ms cubic-bezier(0.22, 1, 0.36, 1) 150ms both;
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 11 — Staggered field entrance */
+.field:nth-child(1) { animation: fieldReveal 400ms ease 200ms both; }
+.field:nth-child(2) { animation: fieldReveal 400ms ease 280ms both; }
+.field:nth-child(3) { animation: fieldReveal 400ms ease 360ms both; }
+.field:nth-child(4) { animation: fieldReveal 400ms ease 440ms both; }
+
+@keyframes fieldReveal {
+  from {
+    opacity: 0;
+    transform: translateX(-16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 12 — Text button underline hover */
+.text-button {
+  transition: color 200ms ease;
+}
+.text-button:hover:not(:disabled) {
+  color: var(--ink);
+}
+
+/* 13 — Switch line grow */
+.switch-line {
+  transform-origin: left;
+  animation: lineGrow 600ms cubic-bezier(0.22, 1, 0.36, 1) 500ms both;
+}
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+/* 14 — Welcome card profile details */
+.welcome .profile-details {
+  animation: borderReveal 500ms ease 300ms both;
+}
+@keyframes borderReveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0% 0 0);
+  }
+}
+
+/* 15 — Brand hover: invert */
+.brand {
+  transition: color 200ms ease;
+}
+.brand:hover {
+  color: var(--accent);
+}
+
+/* 16 — Bottom strip hover effect */
+.bottom-strip span {
+  transition: color 200ms ease;
+}
+.bottom-strip span:hover {
+  color: var(--accent);
+}
+
+/* 17 — Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .field input, .primary, .panel-enter-active, .panel-leave-active {
+    transition: none;
+  }
+  .is-error, .spinner, .scroll-line, .demo-dot,
+  .card-number, .eyebrow, .card h2, .field,
+  .switch-line, .welcome .profile-details {
+    animation: none;
+  }
+  .primary:hover:not(:disabled), .primary:active:not(:disabled),
+  .panel-enter-from, .panel-leave-to {
+    transform: none;
+    clip-path: none;
+  }
+}
